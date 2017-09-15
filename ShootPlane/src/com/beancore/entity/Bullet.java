@@ -59,8 +59,8 @@ public class Bullet {
         for (int i = 0; i < enmeyPlanes.size(); i++) {
             EnemyPlane enemyPlane = enmeyPlanes.get(i);
             if (this.getRectangle().intersects(enemyPlane.getRectangle())) {
-        	enemyPlane.addHittedCount();
-        	return enemyPlane;
+                enemyPlane.addHittedCount();
+                return enemyPlane;
             }
         }
         return null;

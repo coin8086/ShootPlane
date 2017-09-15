@@ -112,38 +112,38 @@ public class GamePlayingPanel extends JPanel implements MouseListener, MouseMoti
         if (b != null) {
             b.setPosY(b.getPosY() - b.getSpeed());
             if (b.getPosY() <= 0) {
-        	synchronized (this.bullets) {
-        	    this.bullets.remove(b);
-        	}
+                synchronized (this.bullets) {
+                    this.bullets.remove(b);
+                }
             }
 
             EnemyPlane enemyPlane = b.hitEnemyPlanes();
             if (enemyPlane != null) {
-        	enemyPlane.drawFighting(this.getComponentGraphics(this.getGraphics()));
-        	if (enemyPlane.isKilled()) {
-        	    switch (enemyPlane.getEnemyType()) {
-        	    case SMALL_ENEMY_PLANE:
-        		this.smallPlaneKilledSoundPlayer.play();
-        		break;
-        	    case BIG_ENEMY_PLANE:
-        		this.bigPlaneKilledSoundPlayer.play();
-        		break;
-        	    case BOSS_ENEMY_PLANE:
-        		this.bossPlaneFlyingSoundPlayer.stop();
-        		this.bossPlaneKilledSoundPlayer.play();
-        		break;
-        	    }
-        	    synchronized (this) {
-        		this.score += enemyPlane.getKilledScore();
-        	    }
-        	    synchronized (this.enemyPlanes) {
-        		this.enemyPlanes.remove(enemyPlane);
-        	    }
-        	    synchronized (this.bullets) {
-        		this.bullets.remove(b);
-        	    }
-        	    enemyPlane.drawKilled(this.getComponentGraphics(this.getGraphics()));
-        	}
+                enemyPlane.drawFighting(this.getComponentGraphics(this.getGraphics()));
+                if (enemyPlane.isKilled()) {
+                    switch (enemyPlane.getEnemyType()) {
+                    case SMALL_ENEMY_PLANE:
+                        this.smallPlaneKilledSoundPlayer.play();
+                        break;
+                    case BIG_ENEMY_PLANE:
+                        this.bigPlaneKilledSoundPlayer.play();
+                        break;
+                    case BOSS_ENEMY_PLANE:
+                        this.bossPlaneFlyingSoundPlayer.stop();
+                        this.bossPlaneKilledSoundPlayer.play();
+                        break;
+                    }
+                    synchronized (this) {
+                        this.score += enemyPlane.getKilledScore();
+                    }
+                    synchronized (this.enemyPlanes) {
+                        this.enemyPlanes.remove(enemyPlane);
+                    }
+                    synchronized (this.bullets) {
+                        this.bullets.remove(b);
+                    }
+                    enemyPlane.drawKilled(this.getComponentGraphics(this.getGraphics()));
+                }
             }
         }
     }
@@ -153,21 +153,21 @@ public class GamePlayingPanel extends JPanel implements MouseListener, MouseMoti
         if (p != null && !p.isKilled()) {
             p.setPosY(p.getPosY() + p.getSpeed());
             if (p.getPosY() >= this.getHeight()) {
-        	if (p.getEnemyType().equals(EnemyPlaneType.BOSS_ENEMY_PLANE)) {
-        	    this.bossPlaneFlyingSoundPlayer.stop();
-        	}
-        	synchronized (this.enemyPlanes) {
-        	    enemyPlanes.remove(p);
-        	}
+                if (p.getEnemyType().equals(EnemyPlaneType.BOSS_ENEMY_PLANE)) {
+                    this.bossPlaneFlyingSoundPlayer.stop();
+                }
+                synchronized (this.enemyPlanes) {
+                    enemyPlanes.remove(p);
+                }
             } else {
-        	if (p.getRectangle().intersects(myPlane.getRectange())) {
-        	    // game ends
-        	    synchronized (myPlane) {
-        		if (myPlane.isAlive()) {
-        		    this.stopGame();
-        		}
-        	    }
-        	}
+                if (p.getRectangle().intersects(myPlane.getRectange())) {
+                    // game ends
+                    synchronized (myPlane) {
+                        if (myPlane.isAlive()) {
+                            this.stopGame();
+                        }
+                    }
+                }
             }
         }
     }
@@ -176,73 +176,73 @@ public class GamePlayingPanel extends JPanel implements MouseListener, MouseMoti
     public void onCatchableWeaponLocationChanged(CatchableWeapon weapon) {
         if (weapon != null) {
             synchronized (weapon) {
-        	int posY = weapon.getPosY();
-        	if (weapon.isUseAnimation()) {
-        	    switch (weapon.getWeaponType()) {
-        	    case BOMB:
-        		if (this.bombAnomationStep == ANIMATION_STEP_1) {
-        		    posY += Config.POP_WEAPON_ANIMATION_MOVE_FORWARD_SPEED;
-        		    this.bombAnomationStep++;
-        		} else if (this.bombAnomationStep == ANIMATION_STEP_2) {
-        		    posY -= Config.POP_WEAPON_ANIMATION_MOV_BACK_SPEED;
-        		    this.bombAnomationStep = 0;
-        		    weapon.setUseAnimation(false);
-        		    weapon.setUseAnimationDone(true);
-        		}
-        		break;
-        	    case DOUBLE_LASER:
-        		if (this.doubleLaserAnimationStep == ANIMATION_STEP_1) {
-        		    posY += Config.POP_WEAPON_ANIMATION_MOVE_FORWARD_SPEED;
-        		    this.doubleLaserAnimationStep++;
-        		} else if (this.doubleLaserAnimationStep == ANIMATION_STEP_2) {
-        		    posY -= Config.POP_WEAPON_ANIMATION_MOV_BACK_SPEED;
-        		    this.doubleLaserAnimationStep = 0;
-        		    weapon.setUseAnimation(false);
-        		    weapon.setUseAnimationDone(true);
-        		}
-        		break;
-        	    }
-        	} else {
-        	    posY += weapon.getSpeed();
-        	}
+                int posY = weapon.getPosY();
+                if (weapon.isUseAnimation()) {
+                    switch (weapon.getWeaponType()) {
+                    case BOMB:
+                        if (this.bombAnomationStep == ANIMATION_STEP_1) {
+                            posY += Config.POP_WEAPON_ANIMATION_MOVE_FORWARD_SPEED;
+                            this.bombAnomationStep++;
+                        } else if (this.bombAnomationStep == ANIMATION_STEP_2) {
+                            posY -= Config.POP_WEAPON_ANIMATION_MOV_BACK_SPEED;
+                            this.bombAnomationStep = 0;
+                            weapon.setUseAnimation(false);
+                            weapon.setUseAnimationDone(true);
+                        }
+                        break;
+                    case DOUBLE_LASER:
+                        if (this.doubleLaserAnimationStep == ANIMATION_STEP_1) {
+                            posY += Config.POP_WEAPON_ANIMATION_MOVE_FORWARD_SPEED;
+                            this.doubleLaserAnimationStep++;
+                        } else if (this.doubleLaserAnimationStep == ANIMATION_STEP_2) {
+                            posY -= Config.POP_WEAPON_ANIMATION_MOV_BACK_SPEED;
+                            this.doubleLaserAnimationStep = 0;
+                            weapon.setUseAnimation(false);
+                            weapon.setUseAnimationDone(true);
+                        }
+                        break;
+                    }
+                } else {
+                    posY += weapon.getSpeed();
+                }
 
-        	weapon.setPosY(posY);
+                weapon.setPosY(posY);
 
-        	if (!weapon.isUseAnimationDone() && weapon.getPosY() >= this.getHeight() / 5) {
-        	    weapon.setUseAnimation(true);
-        	    switch (weapon.getWeaponType()) {
-        	    case BOMB:
-        		if (this.bombAnomationStep == 0) {
-        		    this.bombAnomationStep++;
-        		}
-        		break;
-        	    case DOUBLE_LASER:
-        		if (this.doubleLaserAnimationStep == 0) {
-        		    this.doubleLaserAnimationStep++;
-        		}
-        		break;
-        	    }
-        	}
+                if (!weapon.isUseAnimationDone() && weapon.getPosY() >= this.getHeight() / 5) {
+                    weapon.setUseAnimation(true);
+                    switch (weapon.getWeaponType()) {
+                    case BOMB:
+                        if (this.bombAnomationStep == 0) {
+                            this.bombAnomationStep++;
+                        }
+                        break;
+                    case DOUBLE_LASER:
+                        if (this.doubleLaserAnimationStep == 0) {
+                            this.doubleLaserAnimationStep++;
+                        }
+                        break;
+                    }
+                }
 
-        	if (weapon.getPosY() >= this.getHeight()) {
-        	    weapon.setWeaponDisappear(true);
-        	} else {
-        	    if (weapon.getRectangle().intersects(myPlane.getRectange())) {
-        		switch (weapon.getWeaponType()) {
-        		case BOMB:
-        		    if (myPlane.getHoldBombCount() < Config.BOMB_MAX_HOLD_COUNT) {
-        			myPlane.getHoldBombList().add((Bomb) weapon);
-        			this.getBombSoundPlayer.play();
-        		    }
-        		    break;
-        		case DOUBLE_LASER:
-        		    myPlane.setHitDoubleLaser(true);
-        		    this.getDoubleLaserSoundPlayer.play();
-        		    break;
-        		}
-        		weapon.setWeaponDisappear(true);
-        	    }
-        	}
+                if (weapon.getPosY() >= this.getHeight()) {
+                    weapon.setWeaponDisappear(true);
+                } else {
+                    if (weapon.getRectangle().intersects(myPlane.getRectange())) {
+                        switch (weapon.getWeaponType()) {
+                        case BOMB:
+                            if (myPlane.getHoldBombCount() < Config.BOMB_MAX_HOLD_COUNT) {
+                                myPlane.getHoldBombList().add((Bomb) weapon);
+                                this.getBombSoundPlayer.play();
+                            }
+                            break;
+                        case DOUBLE_LASER:
+                            myPlane.setHitDoubleLaser(true);
+                            this.getDoubleLaserSoundPlayer.play();
+                            break;
+                        }
+                        weapon.setWeaponDisappear(true);
+                    }
+                }
             }
         }
     }
@@ -261,62 +261,62 @@ public class GamePlayingPanel extends JPanel implements MouseListener, MouseMoti
         int posX = Config.SCORE_IMG_POS_X;
         int posY = Config.SCORE_IMG_POS_Y;
         g2d.drawImage(Images.SCORE_IMG, posX, posY, ImageConstants.SCORE_IMG_WIDTH, ImageConstants.SCORE_IMG_HEIGHT,
-        	this);
+                this);
         posX += ImageConstants.SCORE_IMG_WIDTH;
         posY += ImageConstants.SCORE_IMG_HEIGHT - ImageConstants.NUMBER_0_HEIGHT;
         int size = intList.size();
         for (int i = size - 1; i >= 0; i--) {
             switch (intList.get(i)) {
             case Config.NUMBER_0:
-        	g2d.drawImage(Images.NUMBER_0_IMG, posX, posY, ImageConstants.NUMBER_0_WIDTH,
-        		ImageConstants.NUMBER_0_HEIGHT, this);
-        	posX += ImageConstants.NUMBER_0_WIDTH;
-        	break;
+                g2d.drawImage(Images.NUMBER_0_IMG, posX, posY, ImageConstants.NUMBER_0_WIDTH,
+                        ImageConstants.NUMBER_0_HEIGHT, this);
+                posX += ImageConstants.NUMBER_0_WIDTH;
+                break;
             case Config.NUMBER_1:
-        	g2d.drawImage(Images.NUMBER_1_IMG, posX, posY, ImageConstants.NUMBER_1_WIDTH,
-        		ImageConstants.NUMBER_1_HEIGHT, this);
-        	posX += ImageConstants.NUMBER_1_WIDTH;
-        	break;
+                g2d.drawImage(Images.NUMBER_1_IMG, posX, posY, ImageConstants.NUMBER_1_WIDTH,
+                        ImageConstants.NUMBER_1_HEIGHT, this);
+                posX += ImageConstants.NUMBER_1_WIDTH;
+                break;
             case Config.NUMBER_2:
-        	g2d.drawImage(Images.NUMBER_2_IMG, posX, posY, ImageConstants.NUMBER_2_WIDTH,
-        		ImageConstants.NUMBER_2_HEIGHT, this);
-        	posX += ImageConstants.NUMBER_2_WIDTH;
-        	break;
+                g2d.drawImage(Images.NUMBER_2_IMG, posX, posY, ImageConstants.NUMBER_2_WIDTH,
+                        ImageConstants.NUMBER_2_HEIGHT, this);
+                posX += ImageConstants.NUMBER_2_WIDTH;
+                break;
             case Config.NUMBER_3:
-        	g2d.drawImage(Images.NUMBER_3_IMG, posX, posY, ImageConstants.NUMBER_3_WIDTH,
-        		ImageConstants.NUMBER_3_HEIGHT, this);
-        	posX += ImageConstants.NUMBER_3_WIDTH;
-        	break;
+                g2d.drawImage(Images.NUMBER_3_IMG, posX, posY, ImageConstants.NUMBER_3_WIDTH,
+                        ImageConstants.NUMBER_3_HEIGHT, this);
+                posX += ImageConstants.NUMBER_3_WIDTH;
+                break;
             case Config.NUMBER_4:
-        	g2d.drawImage(Images.NUMBER_4_IMG, posX, posY, ImageConstants.NUMBER_4_WIDTH,
-        		ImageConstants.NUMBER_4_HEIGHT, this);
-        	posX += ImageConstants.NUMBER_4_WIDTH;
-        	break;
+                g2d.drawImage(Images.NUMBER_4_IMG, posX, posY, ImageConstants.NUMBER_4_WIDTH,
+                        ImageConstants.NUMBER_4_HEIGHT, this);
+                posX += ImageConstants.NUMBER_4_WIDTH;
+                break;
             case Config.NUMBER_5:
-        	g2d.drawImage(Images.NUMBER_5_IMG, posX, posY, ImageConstants.NUMBER_5_WIDTH,
-        		ImageConstants.NUMBER_5_HEIGHT, this);
-        	posX += ImageConstants.NUMBER_5_WIDTH;
-        	break;
+                g2d.drawImage(Images.NUMBER_5_IMG, posX, posY, ImageConstants.NUMBER_5_WIDTH,
+                        ImageConstants.NUMBER_5_HEIGHT, this);
+                posX += ImageConstants.NUMBER_5_WIDTH;
+                break;
             case Config.NUMBER_6:
-        	g2d.drawImage(Images.NUMBER_6_IMG, posX, posY, ImageConstants.NUMBER_6_WIDTH,
-        		ImageConstants.NUMBER_6_HEIGHT, this);
-        	posX += ImageConstants.NUMBER_6_WIDTH;
-        	break;
+                g2d.drawImage(Images.NUMBER_6_IMG, posX, posY, ImageConstants.NUMBER_6_WIDTH,
+                        ImageConstants.NUMBER_6_HEIGHT, this);
+                posX += ImageConstants.NUMBER_6_WIDTH;
+                break;
             case Config.NUMBER_7:
-        	g2d.drawImage(Images.NUMBER_7_IMG, posX, posY, ImageConstants.NUMBER_7_WIDTH,
-        		ImageConstants.NUMBER_7_HEIGHT, this);
-        	posX += ImageConstants.NUMBER_7_WIDTH;
-        	break;
+                g2d.drawImage(Images.NUMBER_7_IMG, posX, posY, ImageConstants.NUMBER_7_WIDTH,
+                        ImageConstants.NUMBER_7_HEIGHT, this);
+                posX += ImageConstants.NUMBER_7_WIDTH;
+                break;
             case Config.NUMBER_8:
-        	g2d.drawImage(Images.NUMBER_8_IMG, posX, posY, ImageConstants.NUMBER_8_WIDTH,
-        		ImageConstants.NUMBER_8_HEIGHT, this);
-        	posX += ImageConstants.NUMBER_8_WIDTH;
-        	break;
+                g2d.drawImage(Images.NUMBER_8_IMG, posX, posY, ImageConstants.NUMBER_8_WIDTH,
+                        ImageConstants.NUMBER_8_HEIGHT, this);
+                posX += ImageConstants.NUMBER_8_WIDTH;
+                break;
             case Config.NUMBER_9:
-        	g2d.drawImage(Images.NUMBER_9_IMG, posX, posY, ImageConstants.NUMBER_9_WIDTH,
-        		ImageConstants.NUMBER_9_HEIGHT, this);
-        	posX += ImageConstants.NUMBER_9_WIDTH;
-        	break;
+                g2d.drawImage(Images.NUMBER_9_IMG, posX, posY, ImageConstants.NUMBER_9_WIDTH,
+                        ImageConstants.NUMBER_9_HEIGHT, this);
+                posX += ImageConstants.NUMBER_9_WIDTH;
+                break;
             }
         }
     }
@@ -327,27 +327,27 @@ public class GamePlayingPanel extends JPanel implements MouseListener, MouseMoti
             int posX = Config.CAUGHT_BOMB_IMG_POS_X;
             int posY = Config.CAUGHT_BOMB_IMG_POS_Y;
             g2d.drawImage(Images.CAUGHT_BOMB_IMG, posX, posY, ImageConstants.CAUGHT_BOMB_WIDTH,
-        	    ImageConstants.CAUGHT_BOMB_HEIGHT, this);
+                    ImageConstants.CAUGHT_BOMB_HEIGHT, this);
 
             posX += ImageConstants.CAUGHT_BOMB_WIDTH;
             posY += (ImageConstants.CAUGHT_BOMB_HEIGHT - ImageConstants.X_MARK_HEIGHT) / 2;
 
             g2d.drawImage(Images.X_MARK_IMG, posX, posY, ImageConstants.X_MARK_WIDTH, ImageConstants.X_MARK_HEIGHT,
-        	    this);
+                    this);
             posX += ImageConstants.X_MARK_WIDTH;
             switch (this.myPlane.getHoldBombCount()) {
             case Config.ONE_BOMB:
-        	g2d.drawImage(Images.NUMBER_1_IMG, posX, posY, ImageConstants.NUMBER_1_WIDTH,
-        		ImageConstants.NUMBER_1_HEIGHT, this);
-        	break;
+                g2d.drawImage(Images.NUMBER_1_IMG, posX, posY, ImageConstants.NUMBER_1_WIDTH,
+                        ImageConstants.NUMBER_1_HEIGHT, this);
+                break;
             case Config.TWO_BOMB:
-        	g2d.drawImage(Images.NUMBER_2_IMG, posX, posY, ImageConstants.NUMBER_2_WIDTH,
-        		ImageConstants.NUMBER_2_HEIGHT, this);
-        	break;
+                g2d.drawImage(Images.NUMBER_2_IMG, posX, posY, ImageConstants.NUMBER_2_WIDTH,
+                        ImageConstants.NUMBER_2_HEIGHT, this);
+                break;
             case Config.THREE_BOMB:
-        	g2d.drawImage(Images.NUMBER_3_IMG, posX, posY, ImageConstants.NUMBER_3_WIDTH,
-        		ImageConstants.NUMBER_3_HEIGHT, this);
-        	break;
+                g2d.drawImage(Images.NUMBER_3_IMG, posX, posY, ImageConstants.NUMBER_3_WIDTH,
+                        ImageConstants.NUMBER_3_HEIGHT, this);
+                break;
             }
 
         }
@@ -358,108 +358,108 @@ public class GamePlayingPanel extends JPanel implements MouseListener, MouseMoti
         @Override
         public void run() {
             while (myPlane.isAlive()) {
-        	for (int i = 0; i < bullets.size(); i++) {
-        	    Bullet b = bullets.get(i);
-        	    onBulletLocationChanged(b);
-        	}
+                for (int i = 0; i < bullets.size(); i++) {
+                    Bullet b = bullets.get(i);
+                    onBulletLocationChanged(b);
+                }
 
-        	for (int i = 0; i < enemyPlanes.size(); i++) {
-        	    EnemyPlane enemyPlane = enemyPlanes.get(i);
-        	    onEnemyPlaneLocationChanged(enemyPlane);
-        	}
+                for (int i = 0; i < enemyPlanes.size(); i++) {
+                    EnemyPlane enemyPlane = enemyPlanes.get(i);
+                    onEnemyPlaneLocationChanged(enemyPlane);
+                }
 
-        	// ADD PLANE
-        	if (remainTimeToPopSmallPlane > 0) {
-        	    remainTimeToPopSmallPlane -= Config.GAME_PANEL_REPAINT_INTERVAL;
-        	} else {
-        	    // pop a small enemy plane
-        	    EnemyPlane smallPlane = EnemyPlaneFactory.createEnemyPlane(GamePlayingPanel.this,
-        		    EnemyPlaneType.SMALL_ENEMY_PLANE);
-        	    synchronized (GamePlayingPanel.this.enemyPlanes) {
-        		enemyPlanes.add(smallPlane);
-        	    }
-        	    remainTimeToPopSmallPlane = Config.POP_SMALL_ENEMY_PLANE_INTERVAL;
-        	}
+                // ADD PLANE
+                if (remainTimeToPopSmallPlane > 0) {
+                    remainTimeToPopSmallPlane -= Config.GAME_PANEL_REPAINT_INTERVAL;
+                } else {
+                    // pop a small enemy plane
+                    EnemyPlane smallPlane = EnemyPlaneFactory.createEnemyPlane(GamePlayingPanel.this,
+                            EnemyPlaneType.SMALL_ENEMY_PLANE);
+                    synchronized (GamePlayingPanel.this.enemyPlanes) {
+                        enemyPlanes.add(smallPlane);
+                    }
+                    remainTimeToPopSmallPlane = Config.POP_SMALL_ENEMY_PLANE_INTERVAL;
+                }
 
-        	if (remainTimeToPopBigPlane > 0) {
-        	    remainTimeToPopBigPlane -= Config.GAME_PANEL_REPAINT_INTERVAL;
-        	} else {
-        	    // pop a big enemy plane
-        	    EnemyPlane bigPlane = EnemyPlaneFactory.createEnemyPlane(GamePlayingPanel.this,
-        		    EnemyPlaneType.BIG_ENEMY_PLANE);
-        	    synchronized (GamePlayingPanel.this.enemyPlanes) {
-        		enemyPlanes.add(bigPlane);
-        	    }
-        	    remainTimeToPopBigPlane = Config.POP_BIG_ENEMY_PLANE_INTERVAL;
-        	}
+                if (remainTimeToPopBigPlane > 0) {
+                    remainTimeToPopBigPlane -= Config.GAME_PANEL_REPAINT_INTERVAL;
+                } else {
+                    // pop a big enemy plane
+                    EnemyPlane bigPlane = EnemyPlaneFactory.createEnemyPlane(GamePlayingPanel.this,
+                            EnemyPlaneType.BIG_ENEMY_PLANE);
+                    synchronized (GamePlayingPanel.this.enemyPlanes) {
+                        enemyPlanes.add(bigPlane);
+                    }
+                    remainTimeToPopBigPlane = Config.POP_BIG_ENEMY_PLANE_INTERVAL;
+                }
 
-        	if (remainTimeToPopBossPlane > 0) {
-        	    remainTimeToPopBossPlane -= Config.GAME_PANEL_REPAINT_INTERVAL;
-        	} else {
-        	    // pop a boss enemy plane
-        	    EnemyPlane bossPlane = EnemyPlaneFactory.createEnemyPlane(GamePlayingPanel.this,
-        		    EnemyPlaneType.BOSS_ENEMY_PLANE);
-        	    synchronized (GamePlayingPanel.this.enemyPlanes) {
-        		enemyPlanes.add(bossPlane);
-        	    }
-        	    remainTimeToPopBossPlane = Config.POP_BOSS_ENEMY_PLANE_INTERVAL;
-        	    bossPlaneFlyingSoundPlayer.loop();
-        	}
+                if (remainTimeToPopBossPlane > 0) {
+                    remainTimeToPopBossPlane -= Config.GAME_PANEL_REPAINT_INTERVAL;
+                } else {
+                    // pop a boss enemy plane
+                    EnemyPlane bossPlane = EnemyPlaneFactory.createEnemyPlane(GamePlayingPanel.this,
+                            EnemyPlaneType.BOSS_ENEMY_PLANE);
+                    synchronized (GamePlayingPanel.this.enemyPlanes) {
+                        enemyPlanes.add(bossPlane);
+                    }
+                    remainTimeToPopBossPlane = Config.POP_BOSS_ENEMY_PLANE_INTERVAL;
+                    bossPlaneFlyingSoundPlayer.loop();
+                }
 
-        	// ADD BOMB
-        	if (remainTimeToPopBomb > 0) {
-        	    remainTimeToPopBomb -= Config.GAME_PANEL_REPAINT_INTERVAL;
-        	} else {
-        	    // pop bomb
-        	    popBomb = CatchableWeaponFactory.createCatchableWeapon(GamePlayingPanel.this,
-        		    CatchableWeaponType.BOMB);
-        	    remainTimeToPopBomb = Config.POP_BOMBO_INTERVAL;
-        	    popWeaponSoundPlayer.play();
-        	}
+                // ADD BOMB
+                if (remainTimeToPopBomb > 0) {
+                    remainTimeToPopBomb -= Config.GAME_PANEL_REPAINT_INTERVAL;
+                } else {
+                    // pop bomb
+                    popBomb = CatchableWeaponFactory.createCatchableWeapon(GamePlayingPanel.this,
+                            CatchableWeaponType.BOMB);
+                    remainTimeToPopBomb = Config.POP_BOMBO_INTERVAL;
+                    popWeaponSoundPlayer.play();
+                }
 
-        	if (popBomb != null) {
-        	    onCatchableWeaponLocationChanged(popBomb);
-        	}
+                if (popBomb != null) {
+                    onCatchableWeaponLocationChanged(popBomb);
+                }
 
-        	// ADD DOUBLE LASER
-        	if (remainTimeToPopDoubleLaser > 0) {
-        	    remainTimeToPopDoubleLaser -= Config.GAME_PANEL_REPAINT_INTERVAL;
-        	} else {
-        	    // pop double laser
-        	    popDoubleLaser = CatchableWeaponFactory.createCatchableWeapon(GamePlayingPanel.this,
-        		    CatchableWeaponType.DOUBLE_LASER);
-        	    remainTimeToPopDoubleLaser = Config.POP_DOUBLE_LASER_INTERVAL;
-        	    popWeaponSoundPlayer.play();
-        	}
+                // ADD DOUBLE LASER
+                if (remainTimeToPopDoubleLaser > 0) {
+                    remainTimeToPopDoubleLaser -= Config.GAME_PANEL_REPAINT_INTERVAL;
+                } else {
+                    // pop double laser
+                    popDoubleLaser = CatchableWeaponFactory.createCatchableWeapon(GamePlayingPanel.this,
+                            CatchableWeaponType.DOUBLE_LASER);
+                    remainTimeToPopDoubleLaser = Config.POP_DOUBLE_LASER_INTERVAL;
+                    popWeaponSoundPlayer.play();
+                }
 
-        	if (popDoubleLaser != null) {
-        	    onCatchableWeaponLocationChanged(popDoubleLaser);
-        	}
+                if (popDoubleLaser != null) {
+                    onCatchableWeaponLocationChanged(popDoubleLaser);
+                }
 
-        	// CHECK DOUBLE LASER BULLETS RUN OUT
-        	if (remainTimeDoubleLaserRunOut > 0) {
-        	    remainTimeDoubleLaserRunOut -= Config.GAME_PANEL_REPAINT_INTERVAL;
-        	} else {
-        	    myPlane.setHitDoubleLaser(false);
-        	    popDoubleLaser = null;
-        	    remainTimeDoubleLaserRunOut = Config.DOUBLE_LASER_LAST_TIME;
-        	}
+                // CHECK DOUBLE LASER BULLETS RUN OUT
+                if (remainTimeDoubleLaserRunOut > 0) {
+                    remainTimeDoubleLaserRunOut -= Config.GAME_PANEL_REPAINT_INTERVAL;
+                } else {
+                    myPlane.setHitDoubleLaser(false);
+                    popDoubleLaser = null;
+                    remainTimeDoubleLaserRunOut = Config.DOUBLE_LASER_LAST_TIME;
+                }
 
-        	if (popBomb != null && popBomb.isWeaponDisappear()) {
-        	    popBomb = null;
-        	}
+                if (popBomb != null && popBomb.isWeaponDisappear()) {
+                    popBomb = null;
+                }
 
-        	if (popDoubleLaser != null && popDoubleLaser.isWeaponDisappear()) {
-        	    popDoubleLaser = null;
-        	}
+                if (popDoubleLaser != null && popDoubleLaser.isWeaponDisappear()) {
+                    popDoubleLaser = null;
+                }
 
-        	GamePlayingPanel.this.repaint();
+                GamePlayingPanel.this.repaint();
 
-        	try {
-        	    Thread.sleep(Config.GAME_PANEL_REPAINT_INTERVAL);
-        	} catch (InterruptedException e) {
+                try {
+                    Thread.sleep(Config.GAME_PANEL_REPAINT_INTERVAL);
+                } catch (InterruptedException e) {
 
-        	}
+                }
             }
         }
 
@@ -521,27 +521,27 @@ public class GamePlayingPanel extends JPanel implements MouseListener, MouseMoti
         if (this.myPlane.getHoldBombCount() > 0) {
             Graphics g = this.getComponentGraphics(this.getGraphics());
             for (EnemyPlane enemyPlane : this.enemyPlanes) {
-        	synchronized (this) {
-        	    this.score += enemyPlane.getKilledScore();
-        	}
-        	switch (enemyPlane.getEnemyType()) {
-        	case SMALL_ENEMY_PLANE:
-        	    this.smallPlaneKilledSoundPlayer.play();
-        	    break;
-        	case BIG_ENEMY_PLANE:
-        	    this.bigPlaneKilledSoundPlayer.play();
-        	    break;
-        	case BOSS_ENEMY_PLANE:
-        	    this.bossPlaneKilledSoundPlayer.play();
-        	    break;
-        	}
-        	enemyPlane.drawKilled(g);
+                synchronized (this) {
+                    this.score += enemyPlane.getKilledScore();
+                }
+                switch (enemyPlane.getEnemyType()) {
+                case SMALL_ENEMY_PLANE:
+                    this.smallPlaneKilledSoundPlayer.play();
+                    break;
+                case BIG_ENEMY_PLANE:
+                    this.bigPlaneKilledSoundPlayer.play();
+                    break;
+                case BOSS_ENEMY_PLANE:
+                    this.bossPlaneKilledSoundPlayer.play();
+                    break;
+                }
+                enemyPlane.drawKilled(g);
             }
             synchronized (this.bullets) {
-        	this.bullets.clear();
+                this.bullets.clear();
             }
             synchronized (this.enemyPlanes) {
-        	this.enemyPlanes.clear();
+                this.enemyPlanes.clear();
             }
             this.popBomb = null;
             this.popDoubleLaser = null;

@@ -70,19 +70,19 @@ public class MyPlane {
     public void lauchBullet() {
         if (isAlive) {
             if (hitDoubleLaser) {
-        	Bullet bullets[] = BulletFactory.createBlueBullet(this);
-        	for (Bullet bullet : bullets) {
-        	    bullet.addBulletListener(this.playingPanel);
-        	    synchronized (this.playingPanel.getBullets()) {
-        		this.playingPanel.getBullets().add(bullet);
-        	    }
-        	}
+                Bullet bullets[] = BulletFactory.createBlueBullet(this);
+                for (Bullet bullet : bullets) {
+                    bullet.addBulletListener(this.playingPanel);
+                    synchronized (this.playingPanel.getBullets()) {
+                        this.playingPanel.getBullets().add(bullet);
+                    }
+                }
             } else {
-        	Bullet bullet = BulletFactory.createYellowBullet(this);
-        	bullet.addBulletListener(this.playingPanel);
-        	synchronized (this.playingPanel.getBullets()) {
-        	    this.playingPanel.getBullets().add(bullet);
-        	}
+                Bullet bullet = BulletFactory.createYellowBullet(this);
+                bullet.addBulletListener(this.playingPanel);
+                synchronized (this.playingPanel.getBullets()) {
+                    this.playingPanel.getBullets().add(bullet);
+                }
             }
         }
     }
@@ -90,12 +90,12 @@ public class MyPlane {
     class LauchBulletThread implements Runnable {
         public void run() {
             while (isAlive) {
-        	try {
-        	    Thread.sleep(Config.BULLET_FIRE_INTERVAL);
-        	} catch (InterruptedException e) {
+                try {
+                    Thread.sleep(Config.BULLET_FIRE_INTERVAL);
+                } catch (InterruptedException e) {
 
-        	}
-        	lauchBullet();
+                }
+                lauchBullet();
             }
         }
     }

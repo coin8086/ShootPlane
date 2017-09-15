@@ -49,7 +49,7 @@ public class EnemyPlaneFactory {
         enemyPlane.setPosX(posX);
         enemyPlane.setPosY(posY);
         int speed = rand.nextInt(Config.ENEMY_PLANE_MOVE_SPEED_MAX - Config.ENEMY_PLANE_MOVE_SPEED_MIN)
-        	+ Config.ENEMY_PLANE_MOVE_SPEED_MIN;
+                + Config.ENEMY_PLANE_MOVE_SPEED_MIN;
         enemyPlane.setSpeed(speed);
         enemyPlane.addEnemyPlaneListener(playingPanel);
         return enemyPlane;

@@ -58,9 +58,9 @@ public class GameLoadingPanel extends JPanel {
         for (int i = 0; i < times; i++) {
             this.gameLoadingPlaneLabel.setIcon(this.gameLoadingPlaneImgList[i]);
             try {
-        	Thread.sleep(Config.GAME_LOADING_INTERVAL);
+                Thread.sleep(Config.GAME_LOADING_INTERVAL);
             } catch (Exception e) {
-        	e.printStackTrace();
+                e.printStackTrace();
             }
 
         }

@@ -77,7 +77,7 @@ public class GameButton extends JButton implements ImageObserver, MouseListener 
         FontMetrics metric = g.getFontMetrics();
         Rectangle2D rect = metric.getStringBounds(text, g);
         g2d.drawString(text, (float) (buttonWidth / 2 - rect.getWidth() / 2),
-        	(float) ((buttonHeight / 2) + ((metric.getAscent() + metric.getDescent()) / 2 - metric.getDescent())));
+                (float) ((buttonHeight / 2) + ((metric.getAscent() + metric.getDescent()) / 2 - metric.getDescent())));
     }
 
     private void buttonHover() {
