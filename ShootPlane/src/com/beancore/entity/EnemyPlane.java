@@ -24,30 +24,30 @@ public abstract class EnemyPlane {
     private GamePlayingPanel gamePlayingPanel;
 
     public EnemyPlane(GamePlayingPanel getPlayingPanel, EnemyPlaneType enemyType) {
-	this.gamePlayingPanel = getPlayingPanel;
-	this.enemyType = enemyType;
-	this.hittedCount = 0;
+        this.gamePlayingPanel = getPlayingPanel;
+        this.enemyType = enemyType;
+        this.hittedCount = 0;
     }
 
     public Rectangle getRectangle() {
-	return new Rectangle(posX, posY, width, height);
+        return new Rectangle(posX, posY, width, height);
     }
 
     public void draw(Graphics g) {
-	Graphics2D g2d = (Graphics2D) g;
-	g2d.drawImage(planeImage, posX, posY, width, height, gamePlayingPanel);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(planeImage, posX, posY, width, height, gamePlayingPanel);
     }
 
     public void addEnemyPlaneListener(EnemyPlaneListener listener) {
-	this.listener = listener;
+        this.listener = listener;
     }
 
     public void addHittedCount() {
-	this.hittedCount++;
+        this.hittedCount++;
     }
 
     public boolean isKilled() {
-	return this.hittedCount >= this.killedCount;
+        return this.hittedCount >= this.killedCount;
     }
 
     public abstract void drawFighting(Graphics g);
@@ -55,99 +55,99 @@ public abstract class EnemyPlane {
     public abstract void drawKilled(Graphics g);
 
     public EnemyPlaneType getEnemyType() {
-	return enemyType;
+        return enemyType;
     }
 
     public void setEnemyType(EnemyPlaneType enemyType) {
-	this.enemyType = enemyType;
+        this.enemyType = enemyType;
     }
 
     public GamePlayingPanel getGamePlayingPanel() {
-	return gamePlayingPanel;
+        return gamePlayingPanel;
     }
 
     public void setGamePlayingPanel(GamePlayingPanel gamePlayingPanel) {
-	this.gamePlayingPanel = gamePlayingPanel;
+        this.gamePlayingPanel = gamePlayingPanel;
     }
 
     public int getPosX() {
-	return posX;
+        return posX;
     }
 
     public void setPosX(int posX) {
-	this.posX = posX;
+        this.posX = posX;
     }
 
     public int getPosY() {
-	return posY;
+        return posY;
     }
 
     public void setPosY(int posY) {
-	this.posY = posY;
+        this.posY = posY;
     }
 
     public int getWidth() {
-	return width;
+        return width;
     }
 
     public void setWidth(int width) {
-	this.width = width;
+        this.width = width;
     }
 
     public int getHeight() {
-	return height;
+        return height;
     }
 
     public void setHeight(int height) {
-	this.height = height;
+        this.height = height;
     }
 
     public int getSpeed() {
-	return speed;
+        return speed;
     }
 
     public void setSpeed(int speed) {
-	this.speed = speed;
+        this.speed = speed;
     }
 
     public EnemyPlaneListener getListener() {
-	return listener;
+        return listener;
     }
 
     public void setListener(EnemyPlaneListener listener) {
-	this.listener = listener;
+        this.listener = listener;
     }
 
     public Image getPlaneImage() {
-	return planeImage;
+        return planeImage;
     }
 
     public void setPlaneImage(Image planeImage) {
-	this.planeImage = planeImage;
+        this.planeImage = planeImage;
     }
 
     public int getHittedCount() {
-	return hittedCount;
+        return hittedCount;
     }
 
     public void setHittedCount(int hittedCount) {
-	this.hittedCount = hittedCount;
+        this.hittedCount = hittedCount;
     }
 
     public int getKilledCount() {
-	return killedCount;
+        return killedCount;
     }
 
     public void setKilledCount(int killedCount) {
-	this.killedCount = killedCount;
+        this.killedCount = killedCount;
     }
 
     public int getKilledScore() {
-	return killedScore;
+        return killedScore;
     }
 
     public void setKilledScore(int killedScore) {
-	this.killedScore = killedScore;
+        this.killedScore = killedScore;
     }
 
 }

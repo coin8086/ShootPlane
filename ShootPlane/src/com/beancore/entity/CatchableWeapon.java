@@ -24,108 +24,108 @@ public abstract class CatchableWeapon {
     private boolean weaponDisappear;
 
     public CatchableWeapon(GamePlayingPanel gamePlayingPanel, CatchableWeaponType weaponType) {
-	this.gamePlayingPanel = gamePlayingPanel;
-	this.weaponType = weaponType;
-	this.useAnimation = false;
-	this.useAnimationDone = false;
-	this.weaponDisappear = false;
+        this.gamePlayingPanel = gamePlayingPanel;
+        this.weaponType = weaponType;
+        this.useAnimation = false;
+        this.useAnimationDone = false;
+        this.weaponDisappear = false;
     }
 
     public Rectangle getRectangle() {
-	return new Rectangle(posX, posY, width, height);
+        return new Rectangle(posX, posY, width, height);
     }
 
     public void draw(Graphics g) {
-	Graphics2D g2d = (Graphics2D) g;
-	g2d.drawImage(weaponImage, posX, posY, width, height, gamePlayingPanel);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(weaponImage, posX, posY, width, height, gamePlayingPanel);
     }
 
     public int getPosX() {
-	return posX;
+        return posX;
     }
 
     public void setPosX(int posX) {
-	this.posX = posX;
+        this.posX = posX;
     }
 
     public int getPosY() {
-	return posY;
+        return posY;
     }
 
     public void setPosY(int posY) {
-	this.posY = posY;
+        this.posY = posY;
     }
 
     public int getWidth() {
-	return width;
+        return width;
     }
 
     public void setWidth(int width) {
-	this.width = width;
+        this.width = width;
     }
 
     public int getHeight() {
-	return height;
+        return height;
     }
 
     public void setHeight(int height) {
-	this.height = height;
+        this.height = height;
     }
 
     public Image getWeaponImage() {
-	return weaponImage;
+        return weaponImage;
     }
 
     public void setWeaponImage(Image weaponImage) {
-	this.weaponImage = weaponImage;
+        this.weaponImage = weaponImage;
     }
 
     public GamePlayingPanel getGamePlayingPanel() {
-	return gamePlayingPanel;
+        return gamePlayingPanel;
     }
 
     public void setGamePlayingPanel(GamePlayingPanel gamePlayingPanel) {
-	this.gamePlayingPanel = gamePlayingPanel;
+        this.gamePlayingPanel = gamePlayingPanel;
     }
 
     public CatchableWeaponType getWeaponType() {
-	return weaponType;
+        return weaponType;
     }
 
     public void setWeaponType(CatchableWeaponType weaponType) {
-	this.weaponType = weaponType;
+        this.weaponType = weaponType;
     }
 
     public int getSpeed() {
-	return speed;
+        return speed;
     }
 
     public void setSpeed(int speed) {
-	this.speed = speed;
+        this.speed = speed;
     }
 
     public boolean isUseAnimation() {
-	return useAnimation;
+        return useAnimation;
     }
 
     public void setUseAnimation(boolean useAnimation) {
-	this.useAnimation = useAnimation;
+        this.useAnimation = useAnimation;
     }
 
     public boolean isUseAnimationDone() {
-	return useAnimationDone;
+        return useAnimationDone;
     }
 
     public void setUseAnimationDone(boolean useAnimationDone) {
-	this.useAnimationDone = useAnimationDone;
+        this.useAnimationDone = useAnimationDone;
     }
 
     public boolean isWeaponDisappear() {
-	return weaponDisappear;
+        return weaponDisappear;
     }
 
     public void setWeaponDisappear(boolean weaponDisappear) {
-	this.weaponDisappear = weaponDisappear;
+        this.weaponDisappear = weaponDisappear;
     }
 
 }

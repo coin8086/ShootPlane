@@ -19,29 +19,29 @@ public class HelpDialog extends JFrame {
     private JScrollPane scrollPane;
 
     public HelpDialog() {
-	this.initComponent();
+        this.initComponent();
     }
 
     private void initComponent() {
-	this.helpContentTextPane = new JTextPane();
-	this.helpContentTextPane.setEditable(false);
-	this.helpContentTextPane.setContentType("text/html;charset=utf-8");
-	try {
-	    this.helpContentTextPane.setText(FileUtil.readFileToString(Config.HELP_FILE_PATH));
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
+        this.helpContentTextPane = new JTextPane();
+        this.helpContentTextPane.setEditable(false);
+        this.helpContentTextPane.setContentType("text/html;charset=utf-8");
+        try {
+            this.helpContentTextPane.setText(FileUtil.readFileToString(Config.HELP_FILE_PATH));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-	this.scrollPane = new JScrollPane(this.helpContentTextPane);
-	this.scrollPane.setAutoscrolls(true);
+        this.scrollPane = new JScrollPane(this.helpContentTextPane);
+        this.scrollPane.setAutoscrolls(true);
 
-	Container c = this.getContentPane();
-	c.add(this.scrollPane, BorderLayout.CENTER);
+        Container c = this.getContentPane();
+        c.add(this.scrollPane, BorderLayout.CENTER);
 
-	this.setTitle("Help");
-	this.setIconImage(new ImageIcon(Config.LOGO_IMG).getImage());
-	this.setSize(Config.HELP_DIALOG_WIDTH, Config.HELP_DIALOG_HEIGHT);
-	this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        this.setTitle("Help");
+        this.setIconImage(new ImageIcon(Config.LOGO_IMG).getImage());
+        this.setSize(Config.HELP_DIALOG_WIDTH, Config.HELP_DIALOG_HEIGHT);
+        this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
     }
 
 }

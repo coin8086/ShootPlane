@@ -16,14 +16,14 @@ public class ImageLoader {
     private BufferedImage sourceImg;
 
     public ImageLoader(String imagePath) throws IOException {
-	sourceImg = ImageIO.read(new File(imagePath));
+        sourceImg = ImageIO.read(new File(imagePath));
 
     }
 
     public Image getImage(int posX, int posY, int width, int height) {
-	BufferedImage targetImg = this.sourceImg.getSubimage(posX, posY, width, height);
-	Image img = new ImageIcon(targetImg).getImage();
-	return img;
+        BufferedImage targetImg = this.sourceImg.getSubimage(posX, posY, width, height);
+        Image img = new ImageIcon(targetImg).getImage();
+        return img;
     }
 
 }

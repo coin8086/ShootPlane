@@ -6,7 +6,7 @@ import com.beancore.ui.GamePlayingPanel;
 public class Bomb extends CatchableWeapon {
 
     public Bomb(GamePlayingPanel gamePlayingPanel, CatchableWeaponType weaponType) {
-	super(gamePlayingPanel, weaponType);
+        super(gamePlayingPanel, weaponType);
     }
 
 }
